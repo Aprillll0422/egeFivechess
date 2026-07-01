@@ -370,12 +370,7 @@ void run(bool pve)
 	while(1)
 	{		
 		ifbreak=false;
-		//绘制棋盘 
-		chessmark=1;
-		printchess(); 
-		 
-		bgm.SetVolume(0.15);
-		bgm.Play(0);
+		resetBoard();
 		
 		for(;is_run();delay_fps(60))
 		{
