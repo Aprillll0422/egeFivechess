@@ -362,10 +362,10 @@ void run(bool pve)
 	getimage(button,"button.png");
 	lockpo=newimage();
 	getimage(lockpo,"lock.png");
-	drop.OpenFile("C:/Users/、/Desktop/五子棋/五子棋/落子.mp3"); 
-	bgm.OpenFile("C:/Users/、/Desktop/五子棋/五子棋/bgm.mp3");
-	win.OpenFile("C:/Users/、/Desktop/五子棋/五子棋/win.mp3");
-	equalmu.OpenFile("C:/Users/、/Desktop/五子棋/五子棋/equal.mp3");
+	drop.OpenFile("落子.mp3");
+	bgm.OpenFile("bgm.mp3");
+	win.OpenFile("win.mp3");
+	equalmu.OpenFile("equal.mp3");
 
 	while(1)
 	{		
@@ -385,20 +385,20 @@ void run(bool pve)
 				if(r==1) break;
 				continue;
 			}
-			//下棋		
+			//下棋（人机对战时AI回合禁止玩家操作）
 			while(mousemsg())
-			{											
+			{
 				msg=getmouse();
 				if(msg.is_down()&&msg.is_left())
-				{	
+				{
 					//实现退出
 				if(msg.x>=480&&msg.x<=580&&msg.y>=65&&msg.y<=108)
 				{
 					bgm.Stop();
 					return;
-				}				
+				}
 
-					//实现悔棋 
+					//实现悔棋（人机对战时仅玩家回合可悔棋）
 					if(msg.x>=330&&msg.x<=430&&msg.y>=65&&msg.y<=108&&!dropchessx.empty()&&(!pve||chessmark==1)) 
 					{
 						cleardevice();
@@ -420,8 +420,8 @@ void run(bool pve)
 						printchess();
 					}
 					
-					//落子
-					if(30<=msg.x&&msg.x<=670&&130<=msg.y&&msg.y<=770&&chess[(msg.x-30)/40][(msg.y-130)/40]==0)
+					//落子（人机对战时仅玩家回合可落子）
+					if(30<=msg.x&&msg.x<=670&&130<=msg.y&&msg.y<=770&&chess[(msg.x-30)/40][(msg.y-130)/40]==0&&(!pve||chessmark==1))
 					{
 						int x=(msg.x-30)/40,y=(msg.y-130)/40;
 						int r=placeAndCheck(x,y);
