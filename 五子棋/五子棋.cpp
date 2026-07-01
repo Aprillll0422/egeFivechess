@@ -59,6 +59,7 @@ bool ifwin(int cek)
 	//横 
 	for(int i=0;i<16;i++)
 	{
+		cnt=0;
 		for(int j=0;j<16;j++)
 		{
 			if(chess[i][j]==cek)
@@ -70,12 +71,12 @@ bool ifwin(int cek)
 			{
 				cnt=0;
 			}
-			
 		}
 	}
 	//竖 
 	for(int i=0;i<16;i++)
 	{
+		cnt=0;
 		for(int j=0;j<16;j++)
 		{
 			if(chess[j][i]==cek)
@@ -87,12 +88,12 @@ bool ifwin(int cek)
 			{
 				cnt=0;
 			}
-			
 		}
 	}
 	//左斜
 	for(int i=4;i<16;i++)
 	{
+		cnt=0;
 		for(int r=i,c=0;r>=0;--r,++c)
 		{
 			if(chess[r][c]==cek)
@@ -105,10 +106,10 @@ bool ifwin(int cek)
 				cnt=0;
 			}
 		}
-		 
 	}
 	for(int i=11;i>0;i--)
 	{
+		cnt=0;
 		for(int c=i,r=15;c<16;--r,++c)
 		{
 			if(chess[r][c]==cek)
@@ -121,11 +122,11 @@ bool ifwin(int cek)
 				cnt=0;
 			}
 		}
-		 
 	}
 	//右斜
 	for(int i=11;i>=0;i--) 
 	{
+		cnt=0;
 		for(int r=i,c=0;r<16;++r,++c)
 		{
 			if(chess[r][c]==cek)
@@ -141,6 +142,7 @@ bool ifwin(int cek)
 	}
 	for(int i=11;i>=0;i--)
 	{
+		cnt=0;
 		for(int r=0,c=i;c<16;++c,++r)
 		{
 			if(chess[r][c]==cek)
@@ -263,11 +265,11 @@ void aiMove(int &bx,int &by)
 		{
 			if(chess[i][j]!=0) continue;
 			//只考虑已有棋子附近的空位
-			bool near=false;
-			for(int di=-2;di<=2&&!near;di++)
-				for(int dj=-2;dj<=2&&!near;dj++)
-				{ int ni=i+di,nj=j+dj; if(ni>=0&&ni<16&&nj>=0&&nj<16&&chess[ni][nj]!=0) near=true; }
-			if(!near) continue;
+			bool hasNeighbor=false;
+			for(int di=-2;di<=2&&!hasNeighbor;di++)
+				for(int dj=-2;dj<=2&&!hasNeighbor;dj++)
+				{ int ni=i+di,nj=j+dj; if(ni>=0&&ni<16&&nj>=0&&nj<16&&chess[ni][nj]!=0) hasNeighbor=true; }
+			if(!hasNeighbor) continue;
 			int off=evalPos(i,j,2);	//进攻分
 			int def=evalPos(i,j,1);	//防守分
 			int score=off*2+def;
